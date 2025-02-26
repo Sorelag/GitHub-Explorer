@@ -9,17 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.githubexplorer.data.Repository
 import com.example.githubexplorer.ui.theme.GitHubExplorerTheme
-import com.example.githubexplorer.ui.theme.titleStyle
+import com.example.githubexplorer.views.RepositoryListItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,9 +32,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GitHubExplorerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column {
-                        AppName(modifier = Modifier.padding(innerPadding))
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    Column(Modifier.padding(16.dp)) {
+                        AppName(modifier = Modifier.padding(16.dp))
                         TrendingRepositoriesScreen()
                     }
                 }
@@ -44,7 +46,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppName(modifier: Modifier = Modifier) {
     Text(
-        text = stringResource(R.string.app_name, titleStyle),
+        text = stringResource(R.string.app_name),
         modifier = modifier
     )
 }
@@ -71,24 +73,10 @@ fun TrendingRepositoriesScreen(viewModel: MainViewModel = hiltViewModel()) {
 fun RepositoryList(repositories: List<Repository>) {
     LazyColumn {
         items(repositories) { repository ->
-            RepositoryItem(repository = repository)
+            RepositoryListItem(repository = repository)
         }
     }
 }
-
-@Composable
-fun RepositoryItem(repository: Repository) {
-    Column {
-        Text(text = repository.name)
-        Text(text = repository.description ?: "No description")
-        Text(text = "Stars: ${repository.stargazerCount}")
-        Text(text = "Forks: ${repository.forkCount}")
-        Text(text = "Language: ${repository.primaryLanguage ?: "N/A"}")
-        Text(text = "Owner: ${repository.owner}")
-        Text(text = "URL: ${repository.avatarUrl}")
-    }
-}
-
 
 @Preview(showBackground = true)
 @Composable

@@ -8,9 +8,7 @@ data class Repository(
     val name: String,
     val description: String?,
     val stargazerCount: Int,
-    val forkCount: Int,
     val primaryLanguage: String?,
-    val owner: String,
     val avatarUrl: String?
 )
 
@@ -26,7 +24,6 @@ data class Node(
     val name: String?,
     val description: String?,
     val stargazerCount: Int?,
-    val forkCount: Int?,
     val primaryLanguage: PrimaryLanguage?,
     val owner: Owner?
 )

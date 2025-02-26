@@ -10,7 +10,7 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
     fun getRepositories(cursor: String? = null): Flow<List<Repository>> = flow {
         val query = """
         query GetFewRepositories {
-          search(query: "stars:>1000 sort:stars-desc", type: REPOSITORY, first: 5) {
+          search(query: "stars:>1000 sort:stars-desc", type: REPOSITORY, first: 10) {
             edges {
               node {
                 ... on Repository {
@@ -18,8 +18,10 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
                   description
                   stargazerCount
                   owner {
-                    login
                     avatarUrl
+                  }
+                  primaryLanguage {
+                    name
                   }
                 }
               }
@@ -36,9 +38,7 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
                     name = node.name ?: "",
                     description = node.description,
                     stargazerCount = node.stargazerCount ?: 0,
-                    forkCount = node.forkCount ?: 0,
                     primaryLanguage = node.primaryLanguage?.name,
-                    owner = node.owner?.login ?: "",
                     avatarUrl = node.owner?.avatarUrl ?: ""
                 )
             }

@@ -13,7 +13,7 @@ interface GithubApi {
 
     companion object {
         const val TOKEN =
-            "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" //Replace with your token
+            "" //Replace with your token
     }
 
     @POST("graphql")

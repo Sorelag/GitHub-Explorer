@@ -68,6 +68,9 @@ dependencies {
     // Image loading
     implementation(libs.coil.compose)
 
+    // Animation
+    implementation(libs.accompanist.navigation.animation)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

@@ -1,5 +1,8 @@
 [versions]
+accompanistNavigationAnimation = "0.32.0"
 agp = "8.7.3"
+apolloRuntime = "4.0.0-beta.3"
+apolloRuntimeVersion = "3.8.2"
 coilCompose = "2.5.0"
 converterGson = "2.9.0"
 hiltAndroid = "2.48.1"
@@ -20,9 +23,12 @@ okhttp = "4.12.0"
 retrofit = "2.9.0"
 
 [libraries]
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanistNavigationAnimation" }
 androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+apollo-runtime = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apolloRuntime" }
+apollo-runtime-v382 = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apolloRuntimeVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }

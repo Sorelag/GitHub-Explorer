@@ -1,5 +1,6 @@
 package com.example.githubexplorer.views
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,6 +30,12 @@ fun RepositoryDetailItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .background(brush = Brush.verticalGradient(
+                colors = listOf(
+                    MaterialTheme.colorScheme.tertiary,
+                    MaterialTheme.colorScheme.background
+                )
+            ))
             .padding(16.dp)
     ) {
         Column(

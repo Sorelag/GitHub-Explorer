@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.githubexplorer.viewmodels.DetailViewModel
 import com.example.githubexplorer.views.RepositoryDetailItem
@@ -28,8 +29,13 @@ fun DetailsScreen(viewModel: DetailViewModel) {
 
         Column(Modifier.padding(16.dp)) {
             if (isLoading) Text("Loading...")
-            if (error != null) Text("Error: $error")
+            if (error != null) ErrorDisplay(error)
             info?.let { RepositoryDetailItem(it, onButtonClicked = {viewModel.starRequest()}) }
         }
     }
+}
+
+@Composable
+fun ErrorDisplay(message: String) {
+    Text(text = "Error: $message", color = Color.Red)
 }

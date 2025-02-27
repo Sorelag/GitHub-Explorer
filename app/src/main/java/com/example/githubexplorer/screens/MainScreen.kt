@@ -27,7 +27,7 @@ fun MainScreen(viewModel: MainViewModel, navController: NavHostController) {
 
         Column(Modifier.padding(16.dp)) {
             AppName()
-            if (error != null) Text("Error: $error")
+            if (error != null) ErrorDisplay(error)
             RepositoryList(repositories = repositories, viewModel, isLoading, navController, onRefresh = { getRepositories() })
         }
     }

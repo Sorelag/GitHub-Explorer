@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHub Explorer</string>
+    <string name="add_star">Add star</string>
 </resources>

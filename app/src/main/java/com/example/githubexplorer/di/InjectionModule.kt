@@ -1,10 +1,16 @@
 package com.example.githubexplorer.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import com.example.githubexplorer.data.DetailRepository
+import com.example.githubexplorer.data.DetailRepositoryImpl
 import com.example.githubexplorer.data.GitHubRepository
+import com.example.githubexplorer.data.PREF
 import com.example.githubexplorer.networking.GithubApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -51,5 +57,17 @@ object AppModule {
     @Singleton
     fun provideGitHubRepository(api: GithubApi): GitHubRepository {
         return GitHubRepository(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyRepository(sharedPreferences: SharedPreferences): DetailRepository {
+        return DetailRepositoryImpl(sharedPreferences)
     }
 }

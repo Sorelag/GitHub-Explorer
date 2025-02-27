@@ -1,8 +1,8 @@
-package com.example.githubexplorer
+package com.example.githubexplorer.viewmodels
 
-import androidx.activity.result.launch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.githubexplorer.data.DetailRepository
 import com.example.githubexplorer.data.GitHubRepository
 import com.example.githubexplorer.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: GitHubRepository
+    private val repository: GitHubRepository,
+    private val detailRepository: DetailRepository
 ) : ViewModel() {
 
     private val _repositories = MutableStateFlow<List<Repository>>(emptyList())
@@ -28,10 +29,10 @@ class MainViewModel @Inject constructor(
     val error: StateFlow<String?> = _error.asStateFlow()
 
     init {
-        basicRequest()
+        getRepositories()
     }
 
-    private fun basicRequest(cursor: String? = null) {
+    fun getRepositories(cursor: String? = null) {
         viewModelScope.launch {
             _isLoading.value = true
             repository.getRepositories(cursor)
@@ -43,5 +44,9 @@ class MainViewModel @Inject constructor(
                 }
             _isLoading.value = false
         }
+    }
+
+    fun saveData(owner: String, name: String) {
+        detailRepository.saveOwnerAndName(owner, name)
     }
 }

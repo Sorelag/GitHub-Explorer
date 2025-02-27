@@ -1,5 +1,6 @@
 package com.example.githubexplorer.views
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,15 +26,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.githubexplorer.data.Repository
+import com.example.githubexplorer.viewmodels.MainViewModel
 
 @Composable
-fun RepositoryListItem(repository: Repository) {
+fun RepositoryListItem(repository: Repository, viewModel: MainViewModel, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable {
+                with(repository) {
+                    viewModel.saveData(owner, name)
+                }
+                navController.navigate("details")
+            },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(

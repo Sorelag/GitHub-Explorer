@@ -18,13 +18,13 @@ interface GithubApi {
 
     @POST("graphql")
     @Headers("Content-Type: application/json", "Authorization: Bearer $TOKEN")
-    suspend fun executeQuery(@Body request: Request): GraphQLResponse<Data>
+    suspend fun getRepositoryData(@Body request: Request): GraphQLResponse<Data>
 
     @POST("graphql")
     @Headers("Content-Type: application/json", "Authorization: Bearer $TOKEN")
-    suspend fun executeQuery2(@Body body: Request): GraphQLResponse<RepositoryData>
+    suspend fun getRepositoryDetails(@Body body: Request): GraphQLResponse<RepositoryData>
 
     @POST("graphql")
     @Headers("Content-Type: application/json", "Authorization: Bearer $TOKEN")
-    suspend fun executeMutation(@Body body: Request): GraphQLResponse<StarRepositoryResult>
+    suspend fun addStar(@Body body: Request): GraphQLResponse<StarRepositoryResult>
 }

@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+// Basic queries
 class GitHubRepository @Inject constructor(private val api: GithubApi) {
 
     fun getRepositories(cursor: String? = null): Flow<List<Repository>> = flow {
@@ -31,7 +32,7 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
         }
         """.trimIndent()
         val variables = mapOf("cursor" to (cursor ?: ""))
-        val response = api.executeQuery(Request(query, variables))
+        val response = api.getRepositoryData(Request(query, variables))
         val repositories = response.data?.search?.edges?.mapNotNull { edge ->
             edge.node?.let { node ->
                 Repository(
@@ -86,7 +87,7 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
                 """.trimIndent()
 
         val variables = mapOf("owner" to owner, "repoName" to repoName)
-        val response = api.executeQuery2(Request(query, variables))
+        val response = api.getRepositoryDetails(Request(query, variables))
 
         response.data?.repository?.let { repo ->
             val info = RepositoryInfo(
@@ -117,7 +118,7 @@ class GitHubRepository @Inject constructor(private val api: GithubApi) {
 
         val variables = mapOf<String, Any>("repositoryId" to repositoryId)
         val requestBody = Request(mutation, variables)
-        val response = api.executeMutation(requestBody)
+        val response = api.addStar(requestBody)
         emit(response.data?.data)
     }
 

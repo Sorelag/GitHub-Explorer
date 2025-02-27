@@ -1,5 +1,6 @@
 package com.example.githubexplorer.data
 
+// Request data
 data class Request(val query: String, val variables: Map<String, Any>? = null)
 
 data class GraphQLResponse<T>(val data: T?)

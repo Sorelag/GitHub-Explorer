@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Basic transition animation
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(mainViewModel: MainViewModel = hiltViewModel(), detailViewModel: DetailViewModel = hiltViewModel()) {

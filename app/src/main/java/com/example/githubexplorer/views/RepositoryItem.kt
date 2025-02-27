@@ -51,6 +51,7 @@ fun RepositoryListItem(repository: Repository, viewModel: MainViewModel, navCont
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Avatar
             AsyncImage(
                 model = repository.avatarUrl,
                 contentDescription = null,
@@ -61,6 +62,7 @@ fun RepositoryListItem(repository: Repository, viewModel: MainViewModel, navCont
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
+                // Title
                 Text(
                     text = repository.name,
                     style = MaterialTheme.typography.titleMedium,
@@ -69,6 +71,7 @@ fun RepositoryListItem(repository: Repository, viewModel: MainViewModel, navCont
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+                // Description
                 Text(
                     text = repository.description ?: "No description",
                     style = MaterialTheme.typography.bodyMedium,
@@ -76,12 +79,14 @@ fun RepositoryListItem(repository: Repository, viewModel: MainViewModel, navCont
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Language
                     Text(
                         text = repository.primaryLanguage ?: "N/A",
                         style = MaterialTheme.typography.bodySmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    // Stars
                     Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         imageVector = Icons.Filled.Star,
